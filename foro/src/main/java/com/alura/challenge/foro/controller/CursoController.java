@@ -23,8 +23,6 @@ public class CursoController {
     @PostMapping
     public ResponseEntity<DatosRespuestaCurso> registrarCurso(@RequestBody @Valid DatosRegistroCurso datosRegistroCurso, UriComponentsBuilder uriComponentsBuilder){
         Curso curso = cursoRepository.save(new Curso(datosRegistroCurso));
-        //Return 201 Created
-        //URL donde encontrar el medico
         DatosRespuestaCurso datosRespuestaCurso = new DatosRespuestaCurso(curso.getId(), curso.getNombre(),curso.getCategoria());
         URI url = uriComponentsBuilder.path("/medicos/{id}").buildAndExpand(curso.getId()).toUri();
         return ResponseEntity.created(url).body(datosRespuestaCurso);
