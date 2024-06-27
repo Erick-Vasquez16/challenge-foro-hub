@@ -1,5 +1,7 @@
 package com.alura.challenge.foro.domain.usuario;
 
+import com.alura.challenge.foro.domain.perfil.DatosActualizarPerfil;
+import com.alura.challenge.foro.domain.perfil.DatosRegistroPerfil;
 import com.alura.challenge.foro.domain.perfil.Perfil;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -22,6 +24,7 @@ public class Usuario {
     private String nombre;
     private String email;
     private String password;
+    private Boolean status;
 
     @ManyToMany
     @JoinTable(
@@ -30,4 +33,24 @@ public class Usuario {
             inverseJoinColumns = @JoinColumn(name = "perfil_id")
     )
     private Set<Perfil> perfiles;
+
+    public Usuario(DatosRegistroUsuario datosRegistroUsuario){
+        this.status = true;
+        this.nombre = datosRegistroUsuario.nombre();
+        this.email = datosRegistroUsuario.email();
+        this.password = datosRegistroUsuario.password();
+        this.perfiles = datosRegistroUsuario.perfiles();
+    }
+
+    public void actualizarDatos(DatosActualizarUsuario datosActualizarUsuario){
+        if (datosActualizarUsuario.nombre() != null){
+            this.nombre = datosActualizarUsuario.nombre();
+            this.email = datosActualizarUsuario.email();
+            this.password = datosActualizarUsuario.password();
+        }
+    }
+
+    public void desactivarUsuario() {
+        this.status = false;
+    }
 }
