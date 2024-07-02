@@ -11,9 +11,9 @@ public record DatosListadoTopico(
         Long id,
         String titulo,
         String mensaje,
-        LocalDateTime fechaCreacion,
+        LocalDateTime fecha_creacion,
         Boolean status,
-        Usuario autor,
+        Usuario usuario,
         Curso curso,
         List<Respuesta> respuestas
 ) {
@@ -22,9 +22,9 @@ public record DatosListadoTopico(
                 topico.getId(),
                 topico.getTitulo(),
                 topico.getMensaje(),
-                topico.getFechaCreacion(),
+                topico.getFecha_creacion(),
                 topico.getStatus(),
-                topico.getAutor(),
+                topico.getUsuario(),
                 topico.getCurso(),
                 topico.getRespuestas()
         );

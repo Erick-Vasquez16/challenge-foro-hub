@@ -26,12 +26,12 @@ public class Topico {
     private Long id;
     private String titulo;
     private String mensaje;
-    private LocalDateTime fechaCreacion;
+    private LocalDateTime fecha_creacion;
     private Boolean status;
 
     @ManyToOne
-    @JoinColumn(name = "autor_id")
-    private Usuario autor;
+    @JoinColumn(name = "usuario_id")
+    private Usuario usuario;
 
     @ManyToOne
     @JoinColumn(name = "curso_id")
@@ -45,8 +45,8 @@ public class Topico {
         this.status = true;
         this.titulo = datosRegistroTopico.titulo();
         this.mensaje = datosRegistroTopico.mensaje();
-        this.fechaCreacion = datosRegistroTopico.fechaCreacion();
-        this.autor = datosRegistroTopico.autor();
+        this.fecha_creacion = datosRegistroTopico.fecha_creacion();
+        this.usuario = datosRegistroTopico.usuario();
         this.curso = datosRegistroTopico.curso();
         this.respuestas = datosRegistroTopico.respuestas();
 
@@ -56,10 +56,7 @@ public class Topico {
         if (datosActualizarTopico.titulo() != null){
             this.titulo = datosActualizarTopico.titulo();
             this.mensaje = datosActualizarTopico.mensaje();
-            this.fechaCreacion = datosActualizarTopico.fechaCreacion();
-            this.autor = datosActualizarTopico.autor();
-            this.curso = datosActualizarTopico.curso();
-            this.respuestas = datosActualizarTopico.respuestas();
+            this.fecha_creacion = datosActualizarTopico.fecha_creacion();
         }
     }
 

@@ -13,6 +13,6 @@ public record DatosRespuestas(
         LocalDateTime fechaCreacion,
         Boolean solucion,
         Topico topico,
-        Usuario autor
+        Usuario usuario
 ) {
 }

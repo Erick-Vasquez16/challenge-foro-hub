@@ -19,10 +19,10 @@ public class Perfil {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nombre;
-    private Boolean activo;
+    private Boolean status;
 
     public Perfil(DatosRegistroPerfil datosRegistroPerfil){
-        this.activo = true;
+        this.status = true;
         this.nombre = datosRegistroPerfil.nombre();
     }
 
@@ -33,6 +33,6 @@ public class Perfil {
     }
 
     public void desactivarPerfil() {
-        this.activo = false;
+        this.status = false;
     }
 }

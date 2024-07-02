@@ -11,7 +11,7 @@ public record DatosListadoRespuesta(
         LocalDateTime fechaCreacion,
         Boolean solucion,
         Topico topico,
-        Usuario autor
+        Usuario usuario
 ) {
     public  DatosListadoRespuesta(Respuesta respuesta){
         this(
@@ -20,7 +20,7 @@ public record DatosListadoRespuesta(
                 respuesta.getFechaCreacion(),
                 respuesta.getSolucion(),
                 respuesta.getTopico(),
-                respuesta.getAutor()
+                respuesta.getUsuario()
         );
     }
 }

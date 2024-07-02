@@ -25,13 +25,13 @@ public class PerfilController {
     public ResponseEntity<DatosRespuestaPerfil> registrarPerfil(@RequestBody @Valid DatosRegistroPerfil datosRegistroPerfil, UriComponentsBuilder uriComponentsBuilder){
         Perfil perfil = perfilRespository.save(new Perfil(datosRegistroPerfil));
         DatosRespuestaPerfil datosRespuestaPerfil = new DatosRespuestaPerfil(perfil.getId(), perfil.getNombre());
-        URI url = uriComponentsBuilder.path("/medicos/{id}").buildAndExpand(perfil.getId()).toUri();
+        URI url = uriComponentsBuilder.path("/perfil/{id}").buildAndExpand(perfil.getId()).toUri();
         return ResponseEntity.created(url).body(datosRespuestaPerfil);
     }
 
     @GetMapping
     public ResponseEntity<Page<DatosListadoPerfil>> listadoPerfil(@PageableDefault(size = 1) Pageable paginacion) {
-        return ResponseEntity.ok(perfilRespository.findByActivoTrue(paginacion).map(DatosListadoPerfil::new));
+        return ResponseEntity.ok(perfilRespository.findByStatusTrue(paginacion).map(DatosListadoPerfil::new));
     }
 
     @PutMapping

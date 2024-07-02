@@ -13,9 +13,9 @@ public record DatosRegistroTopico(
         String titulo,
         @NotNull
         String mensaje,
-        LocalDateTime fechaCreacion,
+        LocalDateTime fecha_creacion,
         Boolean status,
-        Usuario autor,
+        Usuario usuario,
         Curso curso,
         List<Respuesta> respuestas
 ) {

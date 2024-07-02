@@ -15,10 +15,7 @@ public record DatosActualizarTopico(
         String titulo,
         @NotNull
         String mensaje,
-        LocalDateTime fechaCreacion,
-        Boolean status,
-        Usuario autor,
-        Curso curso,
-        List<Respuesta> respuestas
+        LocalDateTime fecha_creacion,
+        Boolean status
 ) {
 }

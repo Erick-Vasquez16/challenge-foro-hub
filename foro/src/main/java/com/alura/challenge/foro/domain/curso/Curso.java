@@ -19,10 +19,10 @@ public class Curso {
     private String nombre;
     @Enumerated(EnumType.STRING)
     private Categoria categoria;
-    private Boolean activo;
+    private Boolean status;
 
     public Curso(DatosRegistroCurso datosRegistroCurso){
-        this.activo = true;
+        this.status = true;
         this.nombre = datosRegistroCurso.nombre();
         this.categoria =datosRegistroCurso.categoria();
     }
@@ -34,7 +34,7 @@ public class Curso {
     }
 
     public void desactivarCurso() {
-        this.activo = false;
+        this.status = false;
     }
 }
 

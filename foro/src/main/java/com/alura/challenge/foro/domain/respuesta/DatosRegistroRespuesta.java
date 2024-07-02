@@ -13,6 +13,6 @@ public record DatosRegistroRespuesta(
         Boolean solucion,
         @NotNull
         Topico topico,
-        Usuario autor
+        Usuario usuario
 ) {
 }

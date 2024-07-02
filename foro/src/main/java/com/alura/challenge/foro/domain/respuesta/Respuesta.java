@@ -31,28 +31,26 @@ public class Respuesta {
     private Topico topico;
 
     @ManyToOne
-    @JoinColumn(name = "autor_id")
-    private Usuario autor;
-    private boolean activo;
+    @JoinColumn(name = "usuario_id")
+    private Usuario usuario;
+    private Boolean status;
 
     public Respuesta(DatosRegistroRespuesta datosRegistroRespuesta){
-        this.activo = true;
+        this.status = true;
         this.mensaje = datosRegistroRespuesta.mensaje();
         this.fechaCreacion = datosRegistroRespuesta.fechaCreacion();
         this.solucion = datosRegistroRespuesta.solucion();
         this.topico = datosRegistroRespuesta.topico();
-        this.autor = datosRegistroRespuesta.autor();
+        this.usuario = datosRegistroRespuesta.usuario();
     }
     public void actualizarDatos(DatosActualizarRespuesta datosActualizarRespuesta){
         if (datosActualizarRespuesta.mensaje() != null){
             this.mensaje = datosActualizarRespuesta.mensaje();
-            this.fechaCreacion = datosActualizarRespuesta.fechaCreacion();
             this.solucion = datosActualizarRespuesta.solucion();
             this.topico = datosActualizarRespuesta.topico();
-            this.autor = datosActualizarRespuesta.autor();
         }
     }
     public void desactivarRespuesta() {
-        this.activo = false;
+        this.status = false;
     }
 }

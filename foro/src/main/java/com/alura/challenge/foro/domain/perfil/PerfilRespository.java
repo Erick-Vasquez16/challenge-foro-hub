@@ -6,6 +6,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface PerfilRespository extends JpaRepository<Perfil,Long> {
-    Page<Perfil> findByActivoTrue(Pageable paginacion);
+    Page<Perfil> findByStatusTrue(Pageable paginacion);
 
 }

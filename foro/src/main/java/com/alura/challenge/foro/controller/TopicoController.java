@@ -24,14 +24,14 @@ public class TopicoController {
     @PostMapping
     public ResponseEntity<DatosRespuestaTopico> registrarTopico(@RequestBody @Valid DatosRegistroTopico datosRegistroTopico, UriComponentsBuilder uriComponentsBuilder){
         Topico topico = repository.save(new Topico(datosRegistroTopico));
-        DatosRespuestaTopico datosRespuestaTopico = new DatosRespuestaTopico(topico.getId(), topico.getTitulo(),topico.getMensaje(),topico.getFechaCreacion(),topico.getStatus(),topico.getAutor(),topico.getCurso(),topico.getRespuestas());
+        DatosRespuestaTopico datosRespuestaTopico = new DatosRespuestaTopico(topico.getId(), topico.getTitulo(),topico.getMensaje(),topico.getFecha_creacion(),topico.getStatus(),topico.getUsuario(),topico.getCurso(),topico.getRespuestas());
         URI url = uriComponentsBuilder.path("/topico/{id}").buildAndExpand(topico.getId()).toUri();
         return ResponseEntity.created(url).body(datosRespuestaTopico);
     }
 
     @GetMapping
     public ResponseEntity<Page<DatosListadoTopico>> listadoTopico(@PageableDefault(size = 10) Pageable paginacion) {
-        return ResponseEntity.ok(repository.findByActivoTrue(paginacion).map(DatosListadoTopico::new));
+        return ResponseEntity.ok(repository.findByStatusTrue(paginacion).map(DatosListadoTopico::new));
     }
 
     @PutMapping
@@ -39,7 +39,7 @@ public class TopicoController {
     public ResponseEntity actualizarTopico(@RequestBody @Valid DatosActualizarTopico datosActualizarTopico){
         Topico topico = repository.getReferenceById(datosActualizarTopico.id());
         topico.actualizarDatos(datosActualizarTopico);
-        return ResponseEntity.ok(new DatosRespuestaTopico(topico.getId(), topico.getTitulo(),topico.getMensaje(),topico.getFechaCreacion(),topico.getStatus(),topico.getAutor(),topico.getCurso(),topico.getRespuestas()));
+        return ResponseEntity.ok(new DatosRespuestaTopico(topico.getId(), topico.getTitulo(),topico.getMensaje(),topico.getFecha_creacion(),topico.getStatus(),topico.getUsuario(),topico.getCurso(),topico.getRespuestas()));
     }
 
     @DeleteMapping("/{id}")
@@ -53,7 +53,7 @@ public class TopicoController {
     @GetMapping("/{id}")
     public ResponseEntity<DatosRespuestaTopico> retornoDatosTopico(@PathVariable Long id){
         Topico topico = repository.getReferenceById(id);
-        var datosTopico = new DatosRespuestaTopico(topico.getId(), topico.getTitulo(),topico.getMensaje(),topico.getFechaCreacion(),topico.getStatus(),topico.getAutor(),topico.getCurso(),topico.getRespuestas());
+        var datosTopico = new DatosRespuestaTopico(topico.getId(), topico.getTitulo(),topico.getMensaje(),topico.getFecha_creacion(),topico.getStatus(),topico.getUsuario(),topico.getCurso(),topico.getRespuestas());
         topico.desactivarTopico();
         return ResponseEntity.ok(datosTopico);
     }

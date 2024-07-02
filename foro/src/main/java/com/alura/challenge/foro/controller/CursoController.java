@@ -14,7 +14,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.net.URI;
 
 @RestController
-@RequestMapping("/cursos")
+@RequestMapping("/curso")
 public class CursoController {
 
     @Autowired
@@ -24,13 +24,13 @@ public class CursoController {
     public ResponseEntity<DatosRespuestaCurso> registrarCurso(@RequestBody @Valid DatosRegistroCurso datosRegistroCurso, UriComponentsBuilder uriComponentsBuilder){
         Curso curso = cursoRepository.save(new Curso(datosRegistroCurso));
         DatosRespuestaCurso datosRespuestaCurso = new DatosRespuestaCurso(curso.getId(), curso.getNombre(),curso.getCategoria());
-        URI url = uriComponentsBuilder.path("/medicos/{id}").buildAndExpand(curso.getId()).toUri();
+        URI url = uriComponentsBuilder.path("/curso/{id}").buildAndExpand(curso.getId()).toUri();
         return ResponseEntity.created(url).body(datosRespuestaCurso);
     }
 
     @GetMapping
     public ResponseEntity<Page<DatosListadoCurso>> listadoCurso(@PageableDefault(size = 10) Pageable paginacion) {
-        return ResponseEntity.ok(cursoRepository.findByActivoTrue(paginacion).map(DatosListadoCurso::new));
+        return ResponseEntity.ok(cursoRepository.findByStatusTrue(paginacion).map(DatosListadoCurso::new));
     }
 
     @PutMapping

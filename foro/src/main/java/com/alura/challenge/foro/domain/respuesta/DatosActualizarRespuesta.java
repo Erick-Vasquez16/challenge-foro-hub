@@ -10,9 +10,7 @@ public record DatosActualizarRespuesta(
         @NotNull
         Long id,
         String mensaje,
-        LocalDateTime fechaCreacion,
         Boolean solucion,
-        Topico topico,
-        Usuario autor
+        Topico topico
 ) {
 }
