@@ -1,6 +1,6 @@
 package com.alura.challenge.foro.controller;
 
-import com.alura.challenge.foro.domain.perfil.*;
+
 import com.alura.challenge.foro.domain.topico.*;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +24,7 @@ public class TopicoController {
     @PostMapping
     public ResponseEntity<DatosRespuestaTopico> registrarTopico(@RequestBody @Valid DatosRegistroTopico datosRegistroTopico, UriComponentsBuilder uriComponentsBuilder){
         Topico topico = repository.save(new Topico(datosRegistroTopico));
-        DatosRespuestaTopico datosRespuestaTopico = new DatosRespuestaTopico(topico.getId(), topico.getTitulo(),topico.getMensaje(),topico.getFecha_creacion(),topico.getStatus(),topico.getUsuario(),topico.getCurso(),topico.getRespuestas());
+        DatosRespuestaTopico datosRespuestaTopico = new DatosRespuestaTopico(topico.getId(), topico.getTitulo(),topico.getMensaje(),topico.getFecha_creacion(),topico.getAutor(),topico.getStatus());
         URI url = uriComponentsBuilder.path("/topico/{id}").buildAndExpand(topico.getId()).toUri();
         return ResponseEntity.created(url).body(datosRespuestaTopico);
     }
@@ -39,7 +39,7 @@ public class TopicoController {
     public ResponseEntity actualizarTopico(@RequestBody @Valid DatosActualizarTopico datosActualizarTopico){
         Topico topico = repository.getReferenceById(datosActualizarTopico.id());
         topico.actualizarDatos(datosActualizarTopico);
-        return ResponseEntity.ok(new DatosRespuestaTopico(topico.getId(), topico.getTitulo(),topico.getMensaje(),topico.getFecha_creacion(),topico.getStatus(),topico.getUsuario(),topico.getCurso(),topico.getRespuestas()));
+        return ResponseEntity.ok(new DatosRespuestaTopico(topico.getId(), topico.getTitulo(),topico.getMensaje(),topico.getFecha_creacion(),topico.getAutor(),topico.getStatus()));
     }
 
     @DeleteMapping("/{id}")
@@ -53,7 +53,7 @@ public class TopicoController {
     @GetMapping("/{id}")
     public ResponseEntity<DatosRespuestaTopico> retornoDatosTopico(@PathVariable Long id){
         Topico topico = repository.getReferenceById(id);
-        var datosTopico = new DatosRespuestaTopico(topico.getId(), topico.getTitulo(),topico.getMensaje(),topico.getFecha_creacion(),topico.getStatus(),topico.getUsuario(),topico.getCurso(),topico.getRespuestas());
+        var datosTopico = new DatosRespuestaTopico(topico.getId(), topico.getTitulo(),topico.getMensaje(),topico.getFecha_creacion(),topico.getAutor(),topico.getStatus());
         topico.desactivarTopico();
         return ResponseEntity.ok(datosTopico);
     }

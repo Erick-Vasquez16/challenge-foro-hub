@@ -1,8 +1,6 @@
 package com.alura.challenge.foro.domain.topico;
 
-import com.alura.challenge.foro.domain.curso.Curso;
-import com.alura.challenge.foro.domain.respuesta.Respuesta;
-import com.alura.challenge.foro.domain.usuario.Usuario;
+
 import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDateTime;
@@ -13,9 +11,7 @@ public record DatosRespuestaTopico(
         String titulo,
         String mensaje,
         LocalDateTime fecha_creacion,
-        Boolean status,
-        Usuario usuario,
-        Curso curso,
-        List<Respuesta> respuestas
+        String autor,
+        Boolean status
 ) {
 }
